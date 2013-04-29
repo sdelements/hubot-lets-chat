@@ -1,0 +1,20 @@
+{
+  "name": "hubot-lets-chat",
+  "version": "0.0.1",
+  "author": {
+    "name": "Houssam Haidar"
+  },
+  "keywords": "github hubot lets-chat",
+  "description": "Let's Chat Adapter for Hubot",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/hhaidar/hubot-lets-chat.git"
+  },
+  "dependencies": {
+    "socket.io-client": "*"
+  },
+  "devDependencies": {
+    "coffee-script": "*"
+  },
+  "main": "./src/lets-chat.coffee"
+}
