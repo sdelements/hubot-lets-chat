@@ -25,7 +25,7 @@ Set the following environment variables
 ```
 export HUBOT_LCB_USER=user@example.com
 export HUBOT_LCB_PASSWORD=ohmygodthisisbadpractice
-export HUBOT_LCB_ROOM=5279facb1015642226000011
+export HUBOT_LCB_ROOMS=5279facb1015642226000011,5394ffbabdea44e815000003
 ```
 
 These environment variables are *optional* and have default values

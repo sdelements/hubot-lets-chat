@@ -7,7 +7,7 @@ LCB_HOSTNAME = process.env.HUBOT_LCB_HOSTNAME || 'localhost'
 LCB_PORT = process.env.HUBOT_LCB_PORT || 5000
 LCB_USER = process.env.HUBOT_LCB_USER
 LCB_PASSWORD = process.env.HUBOT_LCB_PASSWORD
-LCB_ROOM = process.env.HUBOT_LCB_ROOM
+LCB_ROOMS = process.env.HUBOT_LCB_ROOMS.split(',')
 
 io = require('socket.io-client')
 url = require('url')
@@ -48,8 +48,9 @@ class LCB extends Adapter
         if !@connected
           @emit 'connected'
           @connected = true
-      @socket.emit 'room:join', LCB_ROOM, (room) =>
-        console.log 'Joined ' + room.name
+      for id in LCB_ROOMS
+        @socket.emit 'room:join', id, (room) =>
+          console.log 'Joined ' + room.name
     @socket.on 'room:messages:new', (message) =>
       user = @robot.brain.userForId message.owner,
         room: message.room,
