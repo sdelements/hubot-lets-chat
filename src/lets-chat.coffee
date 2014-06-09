@@ -2,13 +2,12 @@ Robot   = require('hubot').Robot
 Adapter = require('hubot').Adapter
 TextMessage = require('hubot').TextMessage
 
-# TODO: Move these outta here
-LCB_PROTOCOL = 'http'
-LCB_HOSTNAME = 'localhost'
-LCB_PORT = 5000
-LCB_USER = ''
-LCB_PASSWORD = ''
-LCB_ROOM = ''
+LCB_PROTOCOL = process.env.HUBOT_LCB_PROTOCOL || 'http'
+LCB_HOSTNAME = process.env.HUBOT_LCB_HOSTNAME || 'localhost'
+LCB_PORT = process.env.HUBOT_LCB_PORT || 5000
+LCB_USER = process.env.HUBOT_LCB_USER
+LCB_PASSWORD = process.env.HUBOT_LCB_PASSWORD
+LCB_ROOM = process.env.HUBOT_LCB_ROOM
 
 io = require('socket.io-client')
 url = require('url')
