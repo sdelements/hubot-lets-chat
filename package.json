@@ -16,5 +16,5 @@
   "devDependencies": {
     "coffee-script": "*"
   },
-  "main": "./src/lets-chat.coffee"
+  "main": "./src/index.coffee"
 }

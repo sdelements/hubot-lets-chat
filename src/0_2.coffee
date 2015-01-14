@@ -40,9 +40,11 @@ class LCB extends Adapter
 
   run: ->
     @socket = io.connect chatURL
+
     @socket.on 'connect', =>
-      # TODO: Fix this shitty server shit bro
+
       @socket.emit 'user:whoami'
+
       @socket.on 'user:whoami', (profile) =>
         @robot.name = profile.safeName
         if !@connected
@@ -51,15 +53,18 @@ class LCB extends Adapter
       for id in LCB_ROOMS
         @socket.emit 'room:join', id, (room) =>
           console.log 'Joined ' + room.name
-    @socket.on 'room:messages:new', (message) =>
-      user = @robot.brain.userForId message.owner,
-        room: message.room,
-        name: message.name
-      @receive new TextMessage user, message.text
+
+      @socket.on 'room:messages:new', (message) =>
+        user = @robot.brain.userForId message.owner,
+          room: message.room,
+          name: message.name
+        @receive new TextMessage user, message.text
+
     @socket.on 'error', (err) =>
       console.log err
+
     @socket.on 'disconnect', =>
       console.log 'Disconnected!'
 
-exports.use = (robot) ->
+modeule.exports = (robot) ->
   new LCB robot

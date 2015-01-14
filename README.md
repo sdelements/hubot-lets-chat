@@ -21,7 +21,13 @@ Install this adapter via npm
 npm install hubot-lets-chat --save
 ```
 
-Set the following environment variables
+Set the following environment variables for Let's Chat 0.3
+```
+export HUBOT_LCB_API_KEY=sgsag87sa868sag68sa6sa57
+export HUBOT_LCB_ROOMS=5279facb1015642226000011,5394ffbabdea44e815000003
+```
+
+Set the following environment variables for Let's Chat 0.2
 ```
 export HUBOT_LCB_USER=user@example.com
 export HUBOT_LCB_PASSWORD=ohmygodthisisbadpractice
