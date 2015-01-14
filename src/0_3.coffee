@@ -5,7 +5,7 @@ TextMessage = require('hubot').TextMessage
 LCB_PROTOCOL = process.env.HUBOT_LCB_PROTOCOL || 'http'
 LCB_HOSTNAME = process.env.HUBOT_LCB_HOSTNAME || 'localhost'
 LCB_PORT = process.env.HUBOT_LCB_PORT || 5000
-LCB_API_KEY = process.env.HUBOT_LCB_API_KEY
+LCB_TOKEN = process.env.HUBOT_LCB_TOKEN
 LCB_ROOMS = process.env.HUBOT_LCB_ROOMS.split(',')
 
 io = require('socket.io-client')
@@ -16,7 +16,7 @@ chatURL = url.format(
   hostname: LCB_HOSTNAME
   port: LCB_PORT
   query:
-    apiKey: LCB_API_KEY
+    token: LCB_TOKEN
 )
 
 class LCB extends Adapter
