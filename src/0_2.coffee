@@ -66,5 +66,5 @@ class LCB extends Adapter
     @socket.on 'disconnect', =>
       console.log 'Disconnected!'
 
-modeule.exports = (robot) ->
+module.exports = (robot) ->
   new LCB robot
