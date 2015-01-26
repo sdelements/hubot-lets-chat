@@ -41,7 +41,7 @@ export HUBOT_LCB_PASSWORD=ohmygodthisisbadpractice
 export HUBOT_LCB_ROOMS=5279facb1015642226000011,5394ffbabdea44e815000003
 ```
 
-### Let's Chat 0.3+ and 0.2
+### Optional environment variables
 
 These environment variables are *optional* and have default values
 ```
@@ -49,6 +49,8 @@ export HUBOT_LCB_PROTOCOL=http
 export HUBOT_LCB_HOSTNAME=localhost
 export HUBOT_LCB_PORT=5000
 ```
+
+### Let's go!
 
 Enjoy skynet, I hope you're happy with yourself
 ```
