@@ -5,10 +5,10 @@
     "name": "Houssam Haidar"
   },
   "keywords": "github hubot lets-chat",
-  "description": "WIP Let's Chat Adapter for Hubot",
+  "description": "The Official Let's Chat Adapter for Hubot",
   "repository": {
     "type": "git",
-    "url": "http://github.com/hhaidar/hubot-lets-chat.git"
+    "url": "http://github.com/sdelements/hubot-lets-chat.git"
   },
   "dependencies": {
     "socket.io-client": "1.3.2"
