@@ -34,7 +34,7 @@ class LCB extends Adapter
     for str in strings
       @socket.emit 'messages:create',
         'room': user.room,
-        'text': "@#{user.name}: #{str}"
+        'text': "@#{user.user.name} #{str}"
 
   run: ->
     @socket = io.connect chatURL
