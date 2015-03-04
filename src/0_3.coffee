@@ -59,7 +59,7 @@ class LCB extends Adapter
           name: message.owner.username
         # Messages coming from Hubot itself must be filtered by the adapter
         unless message.owner.username is @robot.name
-            @receive new TextMessage user, message.text
+          @receive new TextMessage user, message.text
 
     @socket.on 'error', (err) =>
       console.log err
