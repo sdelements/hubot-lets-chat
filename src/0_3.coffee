@@ -34,7 +34,7 @@ class LCB extends Adapter
     for str in strings
       @socket.emit 'messages:create',
         'room': user.room,
-        'text': "@#{user.name}: #{str}"
+        'text': "@#{user.user.name} #{str}"
 
   run: ->
     @socket = io.connect chatURL
@@ -57,7 +57,9 @@ class LCB extends Adapter
         user = @robot.brain.userForId message.owner.id,
           room: message.room.id,
           name: message.owner.username
-        @receive new TextMessage user, message.text
+        # Messages coming from Hubot itself must be filtered by the adapter
+        unless message.owner.username is @robot.name
+          @receive new TextMessage user, message.text
 
     @socket.on 'error', (err) =>
       console.log err
