@@ -55,6 +55,9 @@ class LCB extends Adapter
             console.log 'Joined ' + room.name
 
       @socket.on 'users:join', (user) =>
+        if user.room not in LCB_ROOMS or user.username is @robot.name
+          return
+
         user = @robot.brain.userForId user.id,
           room: user.room,
           name: user.username
