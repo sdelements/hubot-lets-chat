@@ -1,6 +1,7 @@
 Robot   = require('hubot').Robot
 Adapter = require('hubot').Adapter
 TextMessage = require('hubot').TextMessage
+EnterMessage = require('hubot').EnterMessage
 
 LCB_PROTOCOL = process.env.HUBOT_LCB_PROTOCOL || 'http'
 LCB_HOSTNAME = process.env.HUBOT_LCB_HOSTNAME || 'localhost'
@@ -52,6 +53,13 @@ class LCB extends Adapter
         for id in LCB_ROOMS
           @socket.emit 'rooms:join', id, (room) =>
             console.log 'Joined ' + room.name
+
+      @socket.on 'users:join', (user) =>
+        user = @robot.brain.userForId user.id,
+          room: user.room,
+          name: user.username
+
+        @receive new EnterMessage user, null, user.id
 
       @socket.on 'messages:new', (message) =>
         user = @robot.brain.userForId message.owner.id,
