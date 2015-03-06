@@ -1,6 +1,7 @@
 Robot   = require('hubot').Robot
 Adapter = require('hubot').Adapter
 TextMessage = require('hubot').TextMessage
+EnterMessage = require('hubot').EnterMessage
 
 LCB_PROTOCOL = process.env.HUBOT_LCB_PROTOCOL || 'http'
 LCB_HOSTNAME = process.env.HUBOT_LCB_HOSTNAME || 'localhost'
@@ -34,7 +35,7 @@ class LCB extends Adapter
     for str in strings
       @socket.emit 'messages:create',
         'room': user.room,
-        'text': "@#{user.name}: #{str}"
+        'text': "@#{user.user.name} #{str}"
 
   run: ->
     @socket = io.connect chatURL
@@ -53,11 +54,23 @@ class LCB extends Adapter
           @socket.emit 'rooms:join', id, (room) =>
             console.log 'Joined ' + room.name
 
+      @socket.on 'users:join', (user) =>
+        if user.room not in LCB_ROOMS or user.username is @robot.name
+          return
+
+        user = @robot.brain.userForId user.id,
+          room: user.room,
+          name: user.username
+
+        @receive new EnterMessage user, null, user.id
+
       @socket.on 'messages:new', (message) =>
         user = @robot.brain.userForId message.owner.id,
           room: message.room.id,
           name: message.owner.username
-        @receive new TextMessage user, message.text
+        # Messages coming from Hubot itself must be filtered by the adapter
+        unless message.owner.username is @robot.name
+          @receive new TextMessage user, message.text
 
     @socket.on 'error', (err) =>
       console.log err
