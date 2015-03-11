@@ -8,6 +8,7 @@ LCB_HOSTNAME = process.env.HUBOT_LCB_HOSTNAME || 'localhost'
 LCB_PORT = process.env.HUBOT_LCB_PORT || 5000
 LCB_TOKEN = process.env.HUBOT_LCB_TOKEN
 LCB_ROOMS = process.env.HUBOT_LCB_ROOMS.split(',')
+HTTP_PROXY = process.env.http_proxy || process.env.HTTP_PROXY
 
 io = require('socket.io-client')
 url = require('url')
@@ -20,6 +21,14 @@ chatURL = url.format(
   query:
     token: LCB_TOKEN
 )
+
+connectOptions = {}
+if HTTP_PROXY
+  proxyURL = url.parse(HTTP_PROXY)
+  connectOptions.agent = tunnelAgent.httpOverHttp
+    proxy:
+      host: proxyURL.hostname
+      port: proxyURL.port
 
 class LCB extends Adapter
 
@@ -39,14 +48,7 @@ class LCB extends Adapter
         'text': "@#{user.user.name} #{str}"
 
   run: ->
-    opts = {}
-    if process.env.http_proxy
-      proxyURL = url.parse(process.env.http_proxy)
-      opts.agent = tunnelAgent.httpOverHttp
-        proxy:
-          host: proxyURL.hostname
-          port: proxyURL.port
-    @socket = io.connect chatURL, opts
+    @socket = io.connect chatURL, connectOptions
 
     @socket.on 'connect', =>
       console.log 'connected'
