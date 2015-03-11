@@ -11,6 +11,7 @@ LCB_ROOMS = process.env.HUBOT_LCB_ROOMS.split(',')
 
 io = require('socket.io-client')
 url = require('url')
+tunnelAgent = require('tunnel-agent')
 
 chatURL = url.format(
   protocol: LCB_PROTOCOL
@@ -38,7 +39,14 @@ class LCB extends Adapter
         'text': "@#{user.user.name} #{str}"
 
   run: ->
-    @socket = io.connect chatURL
+    opts = {}
+    if process.env.http_proxy
+      proxyURL = url.parse(process.env.http_proxy)
+      opts.agent = tunnelAgent.httpOverHttp
+        proxy:
+          host: proxyURL.hostname
+          port: proxyURL.port
+    @socket = io.connect chatURL, opts
 
     @socket.on 'connect', =>
       console.log 'connected'
