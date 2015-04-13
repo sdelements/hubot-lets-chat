@@ -54,29 +54,29 @@ class LCB extends Adapter
           @socket.emit 'rooms:join', id, (room) =>
             console.log 'Joined ' + room.name
 
-      @socket.on 'users:join', (user) =>
-        if user.room not in LCB_ROOMS or user.username is @robot.name
-          return
-
-        user = @robot.brain.userForId user.id,
-          room: user.room,
-          name: user.username
-
-        @receive new EnterMessage user, null, user.id
-
-      @socket.on 'messages:new', (message) =>
-        user = @robot.brain.userForId message.owner.id,
-          room: message.room.id,
-          name: message.owner.username
-        # Messages coming from Hubot itself must be filtered by the adapter
-        unless message.owner.username is @robot.name
-          @receive new TextMessage user, message.text
-
     @socket.on 'error', (err) =>
       console.log err
 
     @socket.on 'disconnect', =>
       console.log 'Disconnected!'
+
+    @socket.on 'users:join', (user) =>
+      if user.room not in LCB_ROOMS or user.username is @robot.name
+        return
+
+      user = @robot.brain.userForId user.id,
+        room: user.room,
+        name: user.username
+
+      @receive new EnterMessage user, null, user.id
+
+    @socket.on 'messages:new', (message) =>
+      user = @robot.brain.userForId message.owner.id,
+        room: message.room.id,
+        name: message.owner.username
+      # Messages coming from Hubot itself must be filtered by the adapter
+      unless message.owner.username is @robot.name
+        @receive new TextMessage user, message.text
 
 module.exports = (robot) ->
   new LCB robot
