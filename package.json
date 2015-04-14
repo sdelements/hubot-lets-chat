@@ -2,8 +2,15 @@
   "name": "hubot-lets-chat",
   "version": "0.0.7",
   "author": {
-    "name": "Houssam Haidar"
+    "name": "Houssam Haidar",
+    "email": "houssam@sdelements.com"
   },
+  "contributors": [
+    {
+      "name": "Simon Bartlett",
+      "email": "simon@sdelements.com"
+    }
+  ],
   "keywords": "github hubot lets-chat",
   "description": "The Official Let's Chat Adapter for Hubot",
   "repository": {
