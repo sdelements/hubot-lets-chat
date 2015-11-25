@@ -4,9 +4,9 @@ This is a WIP and will probably be unreliable for a while, so use at your own ri
 
 ## Overview
 
-You already have a Let's Chat (LC) server running, now you want to add hubot.
+You already have a Let's Chat server running, now you want to add hubot.
 
-We're going to install a new stock hubot, and install this hubot "adapter" so it can talk to LC.
+We're going to install a new stock hubot, and install this hubot "adapter" so it can talk to Let's Chat.
 
 ## 1. Install a hubot
 
@@ -20,11 +20,11 @@ You might also like to use the [yeoman hubot installer](https://github.com/githu
 
 ### 2. Install the Adapter
 
-Once your hubot is working, go into your new bot's directory to perform acts of `npm`. 
+Once your hubot is working, change directory into your new bot code:
 
 `cd myhubot`
 
-Install the adapter:
+Then install the adapter with npm:
 
 `npm install hubot-lets-chat --save`
 
@@ -50,15 +50,15 @@ export HUBOT_LCB_HOSTNAME=localhost
 export HUBOT_LCB_PORT=5000
 ```
 
-## 4. Create a bot user in Let's Chat
+## 4. Create a new user in Let's Chat
 
 In the Let's Chat web interface, create a user with the same @name as your bot, like `@myhubot`.
 
-Tip: Let's Chat uses [gravatar](http://gravatar.com for avatars. So if you want to customize the bot avatar, you could use a gmail alias like myemail+hubot@gmail.com, then customize that avatar in Gravatar.
+You can customize it when you boot the hutbot, like `./bin/hubot --adapter lets-chat --name myfancyname`.
+
+Tip for Gmail users: Let's Chat 0.3 uses [gravatar]("http://gravatar.com") for avatars. So if you want to customize the bot avatar, you could use a Gmail alias like myemail+hubot@gmail.com, then customize that avatar in Gravatar.
 
 ### 5. Let's go! Start the server.
-
-Enjoy skynet, I hope you're happy with yourself.
 
 To get the hubot running, start the server with the `lets-chat` adapter. 
 
@@ -67,3 +67,5 @@ bin/hubot -a lets-chat
 ```
 
 If everything goes well, your bot will join you in your Let's Chat instance.
+
+Enjoy skynet, I hope you're happy with yourself.
