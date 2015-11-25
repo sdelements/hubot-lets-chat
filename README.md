@@ -18,7 +18,7 @@ hubot --create myhubot
 
 You might also like to use the [yeoman hubot installer](https://github.com/github/generator-hubot). Check out the [hubot docs](https://hubot.github.com/docs/) for help getting a hubot running.
 
- ### 2. Install the Adapter
+### 2. Install the Adapter
 
 Once your hubot is working, go into your new bot's directory to perform acts of `npm`. 
 
@@ -31,7 +31,6 @@ Install the adapter:
 ### 3. Optional environment variables
 
 Set the following environment variables:
-
 
 - `HUBOT_LCB_ROOMS` You can see these IDs in the URL for the room. NOTE: this is a _comma-separated list_. 
 - `HUBOT_LCB_TOKEN` can be found in the Let's Chat interface. Click on your username and look under "Auth Tokens."
